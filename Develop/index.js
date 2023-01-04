@@ -135,4 +135,19 @@ const promptEmployee = () => {
 }
 )
 };
-promptEmployee();
+
+const writeFile = fileContent => {
+    fs.writeFile('./Develop/template.html', fileContent, error => {
+        if(error) {
+            console.log(error);
+            return;
+        } else {
+            console.log('Congrats, you did it!');
+        }
+    });
+};
+promptEmployee().then(teamArray => {
+    return generateHTML(teamArray);
+}).then(newPageHTML => {
+    return writeFile(newPageHTML);
+})

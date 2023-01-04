@@ -24,6 +24,19 @@ const addManager = () => {
                 }
             }
         },
-        
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Please enter the managers ID',
+            validate: nameInput => {
+                if (isNaN(nameInput)) {
+                    console.log('Please enther the ID')
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        },
     ])
 }
+addManager();

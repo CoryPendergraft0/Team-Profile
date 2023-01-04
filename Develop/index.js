@@ -57,5 +57,44 @@ const questions = [
             }
         }
     },
-
+    {
+        type: 'input',
+        name: 'officeNumber',
+        message: 'What is this employees office number?',
+        when:(officeNumberInput) => officeNumberInput.role === 'Manager',
+        validate: officeNumberInput => {
+            if (officeNumberInput) {
+                return true;
+            } else {
+                console.log('Please enter the office number');
+                return false;
+            }}
+    },
+    {
+        type: 'input',
+        name: 'github',
+        message: 'What is this employees github username?',
+        when:(githubInput) => githubInput.role === 'Engineer',
+        validate: githubInput => {
+            if (githubInput) {
+                return true;
+            } else {
+                console.log('Please enter the Engineers github username');
+                return false;
+            }}
+    },
+    {
+        type: 'input',
+        name: 'school',
+        message: 'What is this interns school?',
+        when:(schoolInput) => schoolInput.role === 'Intern',
+        validate: schoolInput => {
+            if (schoolInput) {
+                return true;
+            } else {
+                console.log('Please enter the interns University');
+                return false;
+            }}
+    },
+    
 ]

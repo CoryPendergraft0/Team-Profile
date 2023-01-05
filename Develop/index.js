@@ -2,7 +2,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const generateHTML = require('./src/page-template');
+const generatePage = require('./src/page-template.js');
 
 const fs = require('fs');
 const inquirer = require('inquirer');
@@ -136,8 +136,8 @@ const promptEmployee = () => {
 )
 };
 
-const writeFile = fileContent => {
-    fs.writeFile('./Develop/template.html', fileContent, error => {
+const writeFile = data => {
+    fs.writeFile('./dist/team.html', data, error => {
         if(error) {
             console.log(error);
             return;
@@ -146,8 +146,8 @@ const writeFile = fileContent => {
         }
     });
 };
-promptEmployee().then(teamArray => {
-    return generateHTML(teamArray);
-}).then(newPageHTML => {
-    return writeFile(newPageHTML);
+promptEmployee().then(data => {
+    return generatePage(data);
+}).then(html => {
+    return writeFile(html);
 })

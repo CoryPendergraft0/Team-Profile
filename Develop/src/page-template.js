@@ -1,73 +1,121 @@
+const managerHTML = manager => {
+  return`
+  <div class="dist card bg-primary mb-3" style="width: 18rem;" >
+  <div class="card-header">
+    Manager <i class="fab fa-black-tie"></i>
+    </span>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name:${manager.name}</li>
+    <li class="list-group-item">Employee ID:${manager.id}</li>
+    <li class="list-group-item">Office Number:${manager.officeNumber}</li>
+    <li class="list-group-item">Email:<a href="mailto:${manager.email}">${manager.email}</a></li>
+  </ul>
+</div>
+  
+  `  
 
-module.exports = (team) => {
-    // TODO: MAIN HTML TEMPLATE LITERAL GOES HERE
-return JSON.stringify(team);
-};
-`<!DOCTYPE html>
+}
+const engineerHTML = engineer => {
+  return`
+  <div class="dist card bg-success mb-3" style="width: 18rem;" >
+  <div class="card-header">
+    Engineer <i class="fas fa-chalkboard-teacher"></i>
+    </span>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name:${engineer.name}</li>
+    <li class="list-group-item">Employee ID:${engineer.id}</li>
+    <li class="list-group-item">GitHub:<a href="https://github.com/${engineer.github}">${engineer.github}</a></li>
+    <li class="list-group-item">Email:<a href="mailto:${engineer.email}">${engineer.email}</a></li>
+  </ul>
+</div>
+  `  
+}
+const internHTML = intern => {
+  return`
+  <div class="dist card bg-info mb-3" style="width: 18rem;" >
+  <div class="card-header">
+    Intern <i class="fas fa-baby"></i>
+    </span>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name:${intern.name}</li>
+    <li class="list-group-item">Employee ID:${intern.id}</li>
+    <li class="list-group-item">School Name:${intern.school}</li>
+    <li class="list-group-item">Email:<a href="mailto:${intern.email}">${intern.email}</a></li>
+  </ul>
+</div>
+  `  
+}
+const generatePage = teamArray => {
+  empList = [];
+  for (let i = 0; teamArray.length>i; i++){ 
+      const role = teamArray[i].getRole();
+
+      if (role === 'Manager'){ 
+          empList.push(managerHTML(teamArray[i]));
+      }
+      if (role === 'Engineer'){ 
+          empList.push(engineerHTML(teamArray[i]));
+      }
+      if (role === 'Intern'){ 
+          empList.push(internHTML(teamArray[i]));
+      }
+  }
+  const  mergedTeam = empList.join(''); 
+  return HTMLPage(mergedTeam); 
+
+
+}
+
+const HTMLPage = mergedTeam =>{
+  return`
+  <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ENTER PAGE TITLE HERE</title>
-  <!-- Minified version -->
-  <style>
-    @import "https://cdn.simplecss.org/simple.min.css";
-
-    main {
-      display: grid;
-      grid-column: 1/-1;
-      justify-items: center;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1rem;
-      max-width: 1140px;
-      margin: auto;
-    }
-
-    @media screen and (max-width: 1140px) {
-      main {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    @media screen and (max-width: 720px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link 
+    rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Tangerine">
+  <link rel="stylesheet" href="./style.css" />
+  <title> My Team </title>
 </head>
 <body>
-  <header>
-    <h1>My Team</h1>
-  </header>
-  <main>
-    <article>
-      <h2>Manager</h2>
-      <ul>
-        <li>ID: 1</li>
-        <li>Email: manager@email.com</li>
-        <li>Office Number: 123</li>
-      </ul>
-    </article>
-    <article>
-      <h2>Engineer</h2>
-      <ul>
-        <li>ID: 2</li>
-        <li>Email: engineer@email.com</li>
-        <li>GitHub: <a href="#github">person</a></li>
-      </ul>
-    </article>
-    <article>
-      <h2>Intern</h2>
-      <ul>
-        <li>ID: 3</li>
-        <li>Email: intern@email.com</li>
-        <li>School: FUN University</li>
-      </ul>
-    </article>
-  </main>
-  <footer>
-    &copy; 2022-2023
-  </footer>
+<header>
+<nav class="navbar" >
+  <span class="navbar-brand mb-0 h1 w-100 text-center" ><h1> My Team </h1></span>
+</nav>
+</header>
+    <main>
+  ${mergedTeam}
+    </main>
+    
 </body>
-</html>`
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</html> 
+  `
+}
+
+
+// export to index.html
+module.exports = generatePage;
